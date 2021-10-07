@@ -1,0 +1,11 @@
+{
+    "en":{
+        "missingData": "Missing Data",
+        "invalidEmail": "This email is not valid or does not exist",
+        "wrongInput": "Incorrect email and/or password",
+        "incomplete" : "Email and/or password missing",
+        "emailTaken" : "This email is already in use",
+        "confirmPassword": "Passwords must be identical"
+    
+        
+    }}
