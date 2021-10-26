@@ -39,12 +39,14 @@ router.post(`/mail/contact`, async (req, res) => {
             }
           });
         } catch (error) {
+          console.log(error);
           res.status(400).json({ error: error.message });
         }
       } else {
         res.status(400).json({ error: languages.en.invalidEmail });
       }
     } catch (error) {
+      console.log(error);
       res.status(400).json({ error: error.message });
     }
   } else {
