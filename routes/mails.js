@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-
+const languages = require("../lang/errorMessages.json");
 const API_KEY = process.env.MAILGUN_API_KEY;
 const DOMAIN = process.env.MAILGUN_DOMAIN;
 const mailgun = require("mailgun-js")({ apiKey: API_KEY, domain: DOMAIN });
@@ -11,9 +11,9 @@ router.post(`/mail/contact`, async (req, res) => {
   const { from, fullName, phone, subject, message } = req.fields;
 
   if (
-    from !== undefined ||
-    subject !== undefined ||
-    fullName !== undefined ||
+    from !== undefined &&
+    subject !== undefined &&
+    fullName !== undefined &&
     message !== undefined
   ) {
     try {
@@ -26,15 +26,14 @@ router.post(`/mail/contact`, async (req, res) => {
       ) {
         try {
           const data = {
-            from: `${fullName} <${from}>`,
-            to: "Swaraa Music <juliantran003@gmail.com>",
-            subject: `${subject}`,
-            text: text,
+            from: `${fullName}<${from}>`,
+            to: "info@swaraamusic.com",
+            subject: subject,
+            text: message,
           };
           await mailgun.messages().send(data, (error, body) => {
             if (body.message === "Queued. Thank you.") {
               res.status(200).json("Email sent!");
-              console.log(body);
             } else {
               res.status(400).json({ error: error.message });
             }
