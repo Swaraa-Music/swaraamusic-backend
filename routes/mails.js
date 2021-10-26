@@ -34,18 +34,17 @@ router.post(`/mail/contact`, async (req, res) => {
             }
           });
         } catch (error) {
-          console.log(error);
           res.status(400).json({ error: error.message });
         }
       } else {
-        res.status(400).json({ error: languages.en.invalidEmail });
+        res.json({ error: languages.en.invalidEmail });
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       res.status(400).json({ error: error.message });
     }
   } else {
-    return res.status(400).json({
+    return res.status(200).json({
       error: languages.en.missingData,
     });
   }
