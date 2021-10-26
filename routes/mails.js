@@ -10,12 +10,7 @@ router.post(`/mail/contact`, async (req, res) => {
   console.log("Using Route : /mail/contact");
   const { from, fullName, phone, subject, message } = req.fields;
 
-  if (
-    from !== undefined &&
-    subject !== undefined &&
-    fullName !== undefined &&
-    message !== undefined
-  ) {
+  if (from !== "" && subject !== "" && fullName !== "" && message !== "") {
     try {
       const response = await axios.get(
         `https://emailvalidation.abstractapi.com/v1/?api_key=${process.env.ABSTRACT_API_KEY}&email=${from}`
