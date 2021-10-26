@@ -27,7 +27,7 @@ router.post(`/mail/contact`, async (req, res) => {
         try {
           const data = {
             from: `${fullName} <${from}>`,
-            to: "Swaraa Music <info@swaraamusic.com>",
+            to: "Swaraa Music <juliantran003@gmail.com>",
             subject: `${subject}`,
             text: text,
           };
