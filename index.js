@@ -17,6 +17,8 @@ app.use((req, res, next) => {
 // Routes
 const mailsRoutes = require("./routes/mails");
 app.use(mailsRoutes);
+const picturesRoutes = require("./routes/pictures");
+app.use(picturesRoutes);
 
 app.all("*", function (req, res) {
   res.json({ message: "Page not found" });
