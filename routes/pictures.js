@@ -28,13 +28,13 @@ router.post("/picture/create", async (req, res) => {
 
   try {
     const picture = req.files.picture.path;
-
+    console.log(picture);
     const result = await cloudinary.uploader.upload(picture, {
       folder: "/swaraamusic",
     });
     newPicture = result.url;
-
-    res.status(200).json("Your picture has been uploaded!");
+    console.log(newPicture);
+    res.status(200).json({ message: "Your picture has been uploaded!" });
   } catch (error) {
     console.log(error);
     res.status(400).json({ error: error.message });
