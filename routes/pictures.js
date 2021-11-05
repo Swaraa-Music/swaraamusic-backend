@@ -22,4 +22,23 @@ router.get(`/pictures`, async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+router.post("/picture/create", async (req, res) => {
+  console.log("Using Route : /picture/create");
+
+  try {
+    const picture = req.files.picture.path;
+
+    const result = await cloudinary.uploader.upload(picture, {
+      folder: "/swaraamusic",
+    });
+    newPicture = result.url;
+
+    res.status(200).json("Your picture has been uploaded!");
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
+});
+
 module.exports = router;
