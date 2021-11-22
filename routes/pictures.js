@@ -16,6 +16,7 @@ router.get(`/pictures`, async (req, res) => {
     const result = await cloudinary.api.resources({
       type: "upload",
       prefix: "swaraamusic", // add your folder
+      max_results: 500,
     });
     res.status(200).json(result);
   } catch (error) {
