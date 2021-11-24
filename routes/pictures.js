@@ -42,4 +42,19 @@ router.post("/picture/create", async (req, res) => {
   }
 });
 
+router.delete("/picture/delete", async (req, res) => {
+  console.log("Using Route : /picture/delete");
+
+  try {
+    const picture = req.fields.publicId;
+    console.log(picture);
+    await cloudinary.uploader.destroy(picture);
+
+    res.status(200).json({ message: "The picture has been deleted!" });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
+});
+
 module.exports = router;
