@@ -42,7 +42,7 @@ router.post("/picture/create", async (req, res) => {
   }
 });
 
-router.delete("/picture/delete", async (req, res) => {
+router.post("/picture/delete", async (req, res) => {
   console.log("Using Route : /picture/delete");
 
   try {
