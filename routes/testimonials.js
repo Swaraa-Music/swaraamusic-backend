@@ -32,4 +32,19 @@ router.post("/testimonial/create", async (req, res) => {
   }
 });
 
+router.delete("/testimonial/delete", async (req, res) => {
+  console.log("Using Route : /testimonial/delete");
+
+  try {
+    const testimonial = req.fields.testimonialId;
+
+    await Testimonial.findByIdAndDelete(testimonial);
+
+    res.status(200).json({ message: "The testimonial has been deleted!" });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
+});
+
 module.exports = router;
