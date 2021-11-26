@@ -15,7 +15,7 @@ router.get(`/pictures`, async (req, res) => {
   try {
     const result = await cloudinary.api.resources({
       type: "upload",
-      prefix: "swaraamusic", // add your folder
+      prefix: "swaraamusic/Past Gigs", // add your folder
       max_results: 500,
     });
     res.status(200).json(result);
@@ -31,7 +31,7 @@ router.post("/picture/create", async (req, res) => {
     const picture = req.files.picture.path;
     console.log(picture);
     const result = await cloudinary.uploader.upload(picture, {
-      folder: "/swaraamusic",
+      folder: "/swaraamusic/Past Gigs",
     });
     newPicture = result.url;
     console.log(newPicture);
