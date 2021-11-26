@@ -32,8 +32,9 @@ router.post("/testimonial/create", async (req, res) => {
   }
 });
 
-router.delete("/testimonial/delete", async (req, res) => {
+router.post("/testimonial/delete", async (req, res) => {
   console.log("Using Route : /testimonial/delete");
+  console.log(req.fields);
 
   try {
     const testimonial = req.fields.testimonialId;
