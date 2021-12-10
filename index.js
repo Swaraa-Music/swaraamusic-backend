@@ -28,6 +28,8 @@ const picturesRoutes = require("./routes/pictures");
 app.use(picturesRoutes);
 const testimonialsRoutes = require("./routes/testimonials");
 app.use(testimonialsRoutes);
+const aboutRoutes = require("./routes/about");
+app.use(aboutRoutes);
 
 app.all("*", function (req, res) {
   res.json({ message: "Page not found" });
