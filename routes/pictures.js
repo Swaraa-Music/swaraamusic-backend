@@ -96,4 +96,110 @@ router.post("/picture/hero/create", async (req, res) => {
   }
 });
 
+router.post("/pictures/hero/update", async (req, res) => {
+  console.log("Using Route : /pictures/hero/update");
+  const urlCheck = /^((http|https|ftp):\/\/)/;
+  const {
+    title1,
+    text1,
+    title2,
+    text2,
+    title3,
+    text3,
+    title4,
+    text4,
+    title5,
+    text5,
+  } = req.fields;
+  const picture1 = req.files.picture1
+    ? req.files.picture1.path
+    : req.fields.picture1;
+  const picture2 = req.files.picture2
+    ? req.files.picture2.path
+    : req.fields.picture2;
+  const picture3 = req.files.picture3
+    ? req.files.picture3.path
+    : req.fields.picture3;
+  const picture4 = req.files.picture4
+    ? req.files.picture4.path
+    : req.fields.picture4;
+  const picture5 = req.files.picture5
+    ? req.files.picture5.path
+    : req.fields.picture5;
+  let newPicture1 = "";
+  let newPicture2 = "";
+  let newPicture3 = "";
+  let newPicture4 = "";
+  let newPicture5 = "";
+
+  try {
+    if (!urlCheck.test(picture1)) {
+      const result = await cloudinary.uploader.upload(picture1, {
+        folder: "/swaraamusic/Hero Sliders",
+      });
+      newPicture1 = result.url;
+    } else {
+      newPicture1 = picture1;
+    }
+    if (!urlCheck.test(picture2)) {
+      const result = await cloudinary.uploader.upload(picture2, {
+        folder: "/swaraamusic/Hero Sliders",
+      });
+      newPicture2 = result.url;
+    } else {
+      newPicture2 = picture2;
+    }
+    if (!urlCheck.test(picture3)) {
+      const result = await cloudinary.uploader.upload(picture3, {
+        folder: "/swaraamusic/Hero Sliders",
+      });
+      newPicture3 = result.url;
+    } else {
+      newPicture3 = picture3;
+    }
+    if (!urlCheck.test(picture4)) {
+      const result = await cloudinary.uploader.upload(picture4, {
+        folder: "/swaraamusic/Hero Sliders",
+      });
+      newPicture4 = result.url;
+    } else {
+      newPicture4 = picture4;
+    }
+    if (!urlCheck.test(picture5)) {
+      const result = await cloudinary.uploader.upload(picture5, {
+        folder: "/swaraamusic/Hero Sliders",
+      });
+      newPicture5 = result.url;
+    } else {
+      newPicture5 = picture5;
+    }
+    const heroSliders = await HeroSlider.find();
+
+    heroSliders[0].text = text1;
+    heroSliders[0].title = title1;
+    heroSliders[0].picture = newPicture1;
+    heroSliders[1].text = text2;
+    heroSliders[1].title = title2;
+    heroSliders[1].picture = newPicture2;
+    heroSliders[2].text = text3;
+    heroSliders[2].title = title3;
+    heroSliders[2].picture = newPicture3;
+    heroSliders[3].text = text4;
+    heroSliders[3].title = title4;
+    heroSliders[3].picture = newPicture4;
+    heroSliders[4].text = text5;
+    heroSliders[4].title = title5;
+    heroSliders[4].picture = newPicture5;
+    await heroSliders[0].save();
+    await heroSliders[1].save();
+    await heroSliders[2].save();
+    await heroSliders[3].save();
+    await heroSliders[4].save();
+    res.status(200).json(heroSliders);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
+});
+
 module.exports = router;
