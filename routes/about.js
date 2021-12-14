@@ -33,12 +33,30 @@ router.post("/about/create", async (req, res) => {
 router.post("/about/update", async (req, res) => {
   console.log("Using Route : /about/update");
   try {
-    const { text, title, subTitle, id } = req.fields;
-    const about = await About.findById(id);
-    about.text = text;
-    about.title = title;
-    about.subTitle = subTitle;
-    about.save();
+    const {
+      aboutText1,
+      aboutTitle1,
+      aboutSubtitle1,
+      aboutText2,
+      aboutTitle2,
+      aboutSubtitle2,
+      aboutText3,
+      aboutTitle3,
+      aboutSubtitle3,
+    } = req.fields;
+    const about = await About.find();
+    about[0].text = aboutText1;
+    about[0].title = aboutTitle1;
+    about[0].subTitle = aboutSubtitle1;
+    about[1].text = aboutText2;
+    about[1].title = aboutTitle2;
+    about[1].subTitle = aboutSubtitle2;
+    about[2].text = aboutText3;
+    about[2].title = aboutTitle3;
+    about[2].subTitle = aboutSubtitle3;
+    await about[0].save();
+    await about[1].save();
+    await about[2].save();
     res.status(200).json(about);
   } catch (error) {
     res.status(400).json({ error: error.message });
