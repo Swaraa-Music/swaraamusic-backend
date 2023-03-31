@@ -45,15 +45,18 @@ router.post("/about/update", async (req, res) => {
       aboutSubtitle3,
     } = req.fields;
     const about = await About.find();
-    about[0].text = aboutText1;
-    about[0].title = aboutTitle1;
-    about[0].subTitle = aboutSubtitle1;
-    about[1].text = aboutText2;
-    about[1].title = aboutTitle2;
-    about[1].subTitle = aboutSubtitle2;
-    about[2].text = aboutText3;
-    about[2].title = aboutTitle3;
-    about[2].subTitle = aboutSubtitle3;
+
+    console.log(about, "about fields list");
+
+    about[0].text = aboutText1 || "";
+    about[0].title = aboutTitle1 || "";
+    about[0].subTitle = aboutSubtitle1 || "";
+    about[1].text = aboutText2 || "";
+    about[1].title = aboutTitle2 || "";
+    about[1].subTitle = aboutSubtitle2 || "";
+    about[2].text = aboutText3 || "";
+    about[2].title = aboutTitle3 || "";
+    about[2].subTitle = aboutSubtitle3 || "";
     await about[0].save();
     await about[1].save();
     await about[2].save();

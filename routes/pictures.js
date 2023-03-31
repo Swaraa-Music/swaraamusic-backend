@@ -11,7 +11,6 @@ cloudinary.config({
 
 router.get(`/pictures`, async (req, res) => {
   console.log("Using Route : /pictures");
-  console.log(req.query);
 
   try {
     const result = await cloudinary.api.resources({
@@ -98,6 +97,7 @@ router.post("/picture/hero/create", async (req, res) => {
 
 router.post("/pictures/hero/update", async (req, res) => {
   console.log("Using Route : /pictures/hero/update");
+
   const urlCheck = /^((http|https|ftp):\/\/)/;
   const {
     title1,
@@ -175,21 +175,21 @@ router.post("/pictures/hero/update", async (req, res) => {
     }
     const heroSliders = await HeroSlider.find();
 
-    heroSliders[0].text = text1;
-    heroSliders[0].title = title1;
-    heroSliders[0].picture = newPicture1;
-    heroSliders[1].text = text2;
-    heroSliders[1].title = title2;
-    heroSliders[1].picture = newPicture2;
-    heroSliders[2].text = text3;
-    heroSliders[2].title = title3;
-    heroSliders[2].picture = newPicture3;
-    heroSliders[3].text = text4;
-    heroSliders[3].title = title4;
-    heroSliders[3].picture = newPicture4;
-    heroSliders[4].text = text5;
-    heroSliders[4].title = title5;
-    heroSliders[4].picture = newPicture5;
+    heroSliders[0].text = text1 || "";
+    heroSliders[0].title = title1 || "";
+    heroSliders[0].picture = newPicture1 || "";
+    heroSliders[1].text = text2 || "";
+    heroSliders[1].title = title2 || "";
+    heroSliders[1].picture = newPicture2 || "";
+    heroSliders[2].text = text3 || "";
+    heroSliders[2].title = title3 || "";
+    heroSliders[2].picture = newPicture3 || "";
+    heroSliders[3].text = text4 || "";
+    heroSliders[3].title = title4 || "";
+    heroSliders[3].picture = newPicture4 || "";
+    heroSliders[4].text = text5 || "";
+    heroSliders[4].title = title5 || "";
+    heroSliders[4].picture = newPicture5 || "";
     await heroSliders[0].save();
     await heroSliders[1].save();
     await heroSliders[2].save();

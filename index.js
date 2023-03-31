@@ -15,6 +15,8 @@ app.use((req, res, next) => {
   next();
 });
 
+mongoose.set("strictQuery", true);
+
 // Database configuration
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -22,8 +24,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Routes
-const mailsRoutes = require("./routes/mails");
-app.use(mailsRoutes);
+// const mailsRoutes = require("./routes/mails");
+// app.use(mailsRoutes);
 const picturesRoutes = require("./routes/pictures");
 app.use(picturesRoutes);
 const testimonialsRoutes = require("./routes/testimonials");
