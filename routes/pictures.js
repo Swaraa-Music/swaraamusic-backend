@@ -2,12 +2,17 @@ const express = require("express");
 const router = express.Router();
 const cloudinary = require("cloudinary").v2;
 const HeroSlider = require("../models/HeroSlider");
+const multer = require("multer");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+// Multer configuration for handling multipart/form-data (file uploads)
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 router.get(`/pictures`, async (req, res) => {
   console.log("Using Route : /pictures");
@@ -24,21 +29,22 @@ router.get(`/pictures`, async (req, res) => {
   }
 });
 
-router.post("/picture/create", async (req, res) => {
-  console.log("Using Route : /picture/create");
-
+router.post("/picture/create", upload.array("images", 5), async (req, res) => {
   try {
-    const picture = req.files.picture.path;
-    console.log(picture);
-    const result = await cloudinary.uploader.upload(picture, {
-      folder: "/swaraamusic/Past Gigs",
-    });
-    newPicture = result.url;
-    console.log(newPicture);
-    res.status(200).json({ message: "Your picture has been uploaded!" });
+    const uploader = async (file) =>
+      await cloudinary.uploader.upload(file.buffer);
+
+    const urls = [];
+    const files = req.files;
+
+    for (const file of files) {
+      const newPath = await uploader(file);
+      urls.push(newPath.secure_url);
+    }
+
+    res.status(200).json({ message: "Images uploaded successfully", urls });
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: "Error uploading images" });
   }
 });
 
