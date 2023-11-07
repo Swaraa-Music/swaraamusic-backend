@@ -3,8 +3,6 @@ const router = express.Router();
 const Testimonial = require("../models/Testimonial");
 
 router.get(`/testimonials`, async (req, res) => {
-  console.log("Using Route : /testimonials");
-  console.log(req.query);
   try {
     const testimonials = await Testimonial.find();
     res.status(200).json(testimonials);
@@ -14,7 +12,6 @@ router.get(`/testimonials`, async (req, res) => {
 });
 
 router.post("/testimonial/create", async (req, res) => {
-  console.log("Using Route : /testimonial/create");
   try {
     const { author, event, testimonial } = req.fields;
 
@@ -33,9 +30,6 @@ router.post("/testimonial/create", async (req, res) => {
 });
 
 router.post("/testimonial/delete", async (req, res) => {
-  console.log("Using Route : /testimonial/delete");
-  console.log(req.fields);
-
   try {
     const testimonial = req.fields.testimonialId;
 
@@ -43,7 +37,6 @@ router.post("/testimonial/delete", async (req, res) => {
 
     res.status(200).json({ message: "The testimonial has been deleted!" });
   } catch (error) {
-    console.log(error);
     res.status(400).json({ error: error.message });
   }
 });

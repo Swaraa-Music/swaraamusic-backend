@@ -3,8 +3,6 @@ const router = express.Router();
 const About = require("../models/About");
 
 router.get(`/abouts`, async (req, res) => {
-  console.log("Using Route : /abouts");
-  console.log(req.query);
   try {
     const abouts = await About.find();
     res.status(200).json(abouts);
@@ -14,7 +12,6 @@ router.get(`/abouts`, async (req, res) => {
 });
 
 router.post("/about/create", async (req, res) => {
-  console.log("Using Route : /about/create");
   try {
     const { text, title, subTitle } = req.fields;
 
@@ -31,7 +28,6 @@ router.post("/about/create", async (req, res) => {
 });
 
 router.post("/about/update", async (req, res) => {
-  console.log("Using Route : /about/update");
   try {
     const {
       aboutText1,
@@ -45,8 +41,6 @@ router.post("/about/update", async (req, res) => {
       aboutSubtitle3,
     } = req.fields;
     const about = await About.find();
-
-    console.log(about, "about fields list");
 
     about[0].text = aboutText1 || "";
     about[0].title = aboutTitle1 || "";

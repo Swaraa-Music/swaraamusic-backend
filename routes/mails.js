@@ -7,7 +7,6 @@ const DOMAIN = process.env.MAILGUN_DOMAIN;
 const mailgun = require("mailgun-js")({ apiKey: API_KEY, domain: DOMAIN });
 
 router.post(`/mail/contact`, async (req, res) => {
-  console.log("Using Route : /mail/contact");
   const { from, fullName, phone, subject, message } = req.fields;
 
   if (from !== "" && subject !== "" && fullName !== "" && message !== "") {
@@ -40,7 +39,6 @@ router.post(`/mail/contact`, async (req, res) => {
         res.json({ error: languages.en.invalidEmail });
       }
     } catch (error) {
-      console.log(error.message);
       res.status(400).json({ error: error.message });
     }
   } else {

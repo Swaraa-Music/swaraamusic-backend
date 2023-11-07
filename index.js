@@ -33,6 +33,9 @@ app.use(testimonialsRoutes);
 const aboutRoutes = require("./routes/about");
 app.use(aboutRoutes);
 
+const homeRoutes = require("./routes/home");
+app.use(homeRoutes);
+
 app.all("*", function (req, res) {
   res.json({ message: "Page not found" });
 });
