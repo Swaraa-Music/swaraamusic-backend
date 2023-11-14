@@ -47,7 +47,7 @@ router.post("/home/update", async (req, res) => {
     home[1].title = homeTitle2 || "";
     home[1].text = homeText2 || "";
     home[1].subTitle = homeSubtitle2 || "";
-    home[0].image = image || "";
+    home[1].image = image || "";
     await home[0].save();
     await home[1].save();
     res.status(200).json(home);
