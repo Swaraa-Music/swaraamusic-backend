@@ -36,6 +36,9 @@ app.use(aboutRoutes);
 const homeRoutes = require("./routes/home");
 app.use(homeRoutes);
 
+const headerRoutes = require("./routes/header");
+app.use(headerRoutes);
+
 app.all("*", function (req, res) {
   res.json({ message: "Page not found" });
 });
